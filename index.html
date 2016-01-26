@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-ember-extension="1">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./faviconmusic.ico">
+
+    <title>Name That Tune - Power Turbo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://bootswatch.com/paper/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link href="./styles/cover.css" rel="stylesheet">
+    <link href="./styles/pace.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="site-wrapper">
+
+        <div class="site-wrapper-inner">
+
+            <div class="cover-container">
+
+                <div class="inner cover">
+                    <h1 class="cover-heading">Name That Tune</h1>
+                    <p class="lead">Plays a random song from a playlist.</p>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <input id="playlistId" class="form-control" id="focusedInput" type="text" placeholder="Playlist" value="PLJ3mf0rLtWzWRMImCWvzt4K9ppGbb70Y2">
+                        </div>
+                        <button id="loadButton" class="btn btn-primary"><i class="fa fa-hand-spock-o"></i></button>
+                    </div>
+                    <div class="controls">
+                        <button id="playpause" data-state="paused" class="btn btn-lg btn-warning"><i class="fa fa-play-circle fa-2x fa-fw"></i></button>
+                        <button id="next" class="btn btn-lg btn-warning"><i class="fa fa-step-forward fa-2x fa-fw"></i></button>
+                    </div>
+                    <p id="title" class="lead"></p>
+
+                    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+                    <div id="player"></div>
+                </div>
+
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>By Power Turbo Team</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="http://chancejs.com/chance.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/pace.min.js"></script>
+
+    <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+            height: '0',
+            width: '0',
+            videoId: ''
+            });
+        }
+    </script>
+
+</body>
+
+</html>
