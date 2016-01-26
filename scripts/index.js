@@ -1,9 +1,3 @@
-// var paceOptions = {
-//   ajax: true, // disabled
-//   document: true, // disabled
-//   eventLag: false // disabled
-// };
-
 var gapiKey = 'AIzaSyDY-mJQlm2q0phHYI2IKSdfsd9DgLmd0zA';
 var playListItemsUrl = 'https://www.googleapis.com/youtube/v3/playlistItems';
 var playListItemsOptions = {
@@ -49,11 +43,6 @@ $(function () {
     $('#loadButton').click(function () {
         var playlistId = $('#playlistId').val();
         playListItemsOptions.playlistId = playlistId;
-        // gapi.client.youtube.playlistItems.list(playListItemsOptions)
-        //     .then(function (resp) {
-
-        //     });
-        
         $.get(playListItemsUrl, playListItemsOptions)
             .done(handlePlaylistResponse);
     });
@@ -85,13 +74,3 @@ $(function () {
     });
 
 });
-
-// function handleClientLoad() {
-//     gapi.client.setApiKey(apiKey);
-//     gapi.client.load('youtube', 'v3')
-//         .then(function () {
-//             console.log('Youtube API loaded.');
-//         });
-// }
-
-// function 
