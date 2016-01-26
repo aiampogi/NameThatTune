@@ -10,17 +10,20 @@
     <meta name="author" content="">
     <link rel="icon" href="./faviconmusic.ico">
 
-    <title>Name That Tune</title>
+    <title>Playlist Randomizer</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://bootswatch.com/paper/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./styles/cover.css" rel="stylesheet">
     <link href="./styles/pace.css" rel="stylesheet">
 </head>
 
 <body>
+    <a href="https://github.com/aiampogi"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67"
+        alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"></a>
 
     <div class="site-wrapper">
 
@@ -29,17 +32,19 @@
             <div class="cover-container">
 
                 <div class="inner cover">
-                    <h1 class="cover-heading">Name That Tune</h1>
+                    <h1 class="cover-heading">Playlist Randomizer</h1>
                     <p class="lead">Plays a random song from a playlist.</p>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <input id="playlistId" class="form-control" id="focusedInput" type="text" placeholder="Playlist" value="PLJ3mf0rLtWzWRMImCWvzt4K9ppGbb70Y2">
+                    <div class="row">
+                        <div class="form-group col-md-6 col-md-offset-3">
+                            <input id="playlistUrl" class="form-control" id="focusedInput" type="text" placeholder="Youtube Playlist URL" value="">
                         </div>
-                        <button id="loadButton" class="btn btn-primary"><i class="fa fa-hand-spock-o"></i></button>
+                        <!--<button id="loadButton" class="btn btn-primary"><i class="fa fa-hand-spock-o"></i></button>-->
                     </div>
                     <div class="controls">
                         <button id="playpause" data-state="paused" class="btn btn-lg btn-warning"><i class="fa fa-play-circle fa-2x fa-fw"></i></button>
-                        <button id="next" class="btn btn-lg btn-warning"><i class="fa fa-step-forward fa-2x fa-fw"></i></button>
+                        <button id="next" class="btn btn-lg btn-warning"><i class="fa fa-random fa-2x fa-fw"></i></button>
+                        <button id="expand" class="collapse btn btn-lg btn-warning"><i class="fa fa-expand fa-2x fa-fw"></i></button>
+                        <button id="compress" class="collapse btn btn-lg btn-warning"><i class="fa fa-compress fa-2x fa-fw"></i></button>
                     </div>
                     <p id="title" class="lead"></p>
 
@@ -49,7 +54,13 @@
 
                 <div class="mastfoot">
                     <div class="inner">
-                        <p>By <a href="http://weekendchronicles.com">Aia Patag</a></p>
+                        <p>By <a href="http://weekendchronicles.com" target="_blank">Aia Patag</a></p>
+                        <iframe src="https://ghbtns.com/github-btn.html?user=aiampogi&repo=namethattune&type=star&count=true" frameborder="0" scrolling="0"
+                        width="85px" height="20px"></iframe>
+                        <iframe src="https://ghbtns.com/github-btn.html?user=aiampogi&repo=namethattune&type=fork&count=true" frameborder="0" scrolling="0"
+                        width="85px" height="20px"></iframe>
+                        <iframe src="https://ghbtns.com/github-btn.html?user=aiampogi&type=follow&count=true" frameborder="0" scrolling="0" width="170px"
+                        height="20px"></iframe>
                     </div>
                 </div>
 
@@ -66,8 +77,9 @@
     <script src="http://chancejs.com/chance.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
     crossorigin="anonymous"></script>
-    <script src="./scripts/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="./scripts/pace.min.js"></script>
+    <script src="./scripts/index.js"></script>
 
     <script>
         // 2. This code loads the IFrame Player API code asynchronously.
@@ -84,8 +96,13 @@
             player = new YT.Player('player', {
             height: '0',
             width: '0',
-            videoId: ''
+            videoId: '',
+            events: {
+                'onError': playerOnErrorHandler
+                }
             });
+            
+            loadDefaultPlaylist();
         }
     </script>
 </body>
