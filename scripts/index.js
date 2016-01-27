@@ -74,7 +74,7 @@ function handlePlaylistResponseAutoPlay(resp) {
     else {
         var firstToBePlayed = seededChance.pick(items);
         $('#title').text(firstToBePlayed.vidTitle);
-        player.loadVideoById(firstToBePlayed.vidId, 10, 'medium');
+        player.loadVideoById(firstToBePlayed.vidId, 0, 'medium');
     }
 }
 
@@ -88,7 +88,7 @@ function handlePlaylistResponsePaused(resp) {
     else {
         var firstToBePlayed = seededChance.pick(items);
         $('#title').text(firstToBePlayed.vidTitle);
-        player.loadVideoById(firstToBePlayed.vidId, 10, 'medium');
+        player.loadVideoById(firstToBePlayed.vidId, 0, 'medium');
         player.pauseVideo();
     }
 }
@@ -118,6 +118,22 @@ function changePlayButtonToPlaying($button) {
 }
 function playerOnErrorHandler(event) {
     toastr["error"]("Video cannot be played as embedded! Shuffle!");
+}
+
+function playerOnStateChangeHandler(state) {
+    if (state == YT.PlayerState.ENDED) {
+        playNext();
+    }
+}
+
+function playNext() {
+    $('#playpause>i').attr('class', 'fa fa-pause-circle fa-2x fa-fw');
+    $('#playpause').data('state', 'playing');
+
+    var nextVideo = seededChance.pick(items);
+
+    player.loadVideoById(nextVideo.vidId, 0, 'medium');
+    $('#title').text(nextVideo.vidTitle);
 }
 
 function debugMode(flag) {
@@ -179,13 +195,7 @@ $(function () {
     });
 
     $('#next').click(function () {
-        $('#playpause>i').attr('class', 'fa fa-pause-circle fa-2x fa-fw');
-        $('#playpause').data('state', 'playing');
-
-        var nextVideo = seededChance.pick(items);
-
-        player.loadVideoById(nextVideo.vidId, 10, 'medium');
-        $('#title').text(nextVideo.vidTitle);
+        playNext();
     });
 
     $('#expand').click(function () {
