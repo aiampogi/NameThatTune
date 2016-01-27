@@ -75,6 +75,7 @@ function handlePlaylistResponseAutoPlay(resp) {
         var firstToBePlayed = seededChance.pick(items);
         $('#title').text(firstToBePlayed.vidTitle);
         player.loadVideoById(firstToBePlayed.vidId, 0, 'medium');
+        player.playVideo();
     }
 }
 
