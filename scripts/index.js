@@ -118,7 +118,8 @@ function changePlayButtonToPlaying($button) {
     $button.data('state', 'paused');
 }
 function playerOnErrorHandler(event) {
-    toastr["error"]("Video cannot be played as embedded! Shuffle!");
+    toastr["error"]("Video cannot be played as embedded! Shuffling!");
+        playNext();
 }
 
 function playerOnStateChangeHandler(state) {
