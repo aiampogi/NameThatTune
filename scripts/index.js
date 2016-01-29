@@ -74,7 +74,7 @@ function handlePlaylistResponseAutoPlay(resp) {
     else {
         var firstToBePlayed = seededChance.pick(items);
         $('#title').text(firstToBePlayed.vidTitle);
-        player.loadVideoById(firstToBePlayed.vidId, 0, 'medium');
+        player.loadVideoById(firstToBePlayed.vidId, 10, 'medium');
         player.playVideo();
     }
 }
@@ -89,7 +89,7 @@ function handlePlaylistResponsePaused(resp) {
     else {
         var firstToBePlayed = seededChance.pick(items);
         $('#title').text(firstToBePlayed.vidTitle);
-        player.loadVideoById(firstToBePlayed.vidId, 0, 'medium');
+        player.loadVideoById(firstToBePlayed.vidId, 10, 'medium');
         player.pauseVideo();
     }
 }
@@ -134,7 +134,7 @@ function playNext() {
 
     var nextVideo = seededChance.pick(items);
 
-    player.loadVideoById(nextVideo.vidId, 0, 'medium');
+    player.loadVideoById(nextVideo.vidId, 10, 'medium');
     $('#title').text(nextVideo.vidTitle);
     player.playVideo();
 }
