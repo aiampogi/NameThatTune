@@ -17,7 +17,7 @@ URL.prototype.__defineGetter__('query', function () {
 });
 
 var gapiKey = 'AIzaSyDY-mJQlm2q0phHYI2IKSdfsd9DgLmd0zA';
-var defaultPlaylist = 'http://youtube.com/playlist?list=PLJ3mf0rLtWzWRMImCWvzt4K9ppGbb70Y2';
+var defaultPlaylist = 'http://youtube.com/playlist?list=UUwTRjvjVge51X-ILJ4i22ew';
 var currentPlaylist = null;
 var seededChance = null;
 var playListItemsUrl = 'https://www.googleapis.com/youtube/v3/playlistItems';
@@ -119,11 +119,11 @@ function changePlayButtonToPlaying($button) {
 }
 function playerOnErrorHandler(event) {
     toastr["error"]("Video cannot be played as embedded! Shuffling!");
-        playNext();
+    playNext();
 }
 
 function playerOnStateChangeHandler(state) {
-    if (state == YT.PlayerState.ENDED) {
+    if (state.data == YT.PlayerState.ENDED) {
         playNext();
     }
 }
@@ -136,6 +136,7 @@ function playNext() {
 
     player.loadVideoById(nextVideo.vidId, 0, 'medium');
     $('#title').text(nextVideo.vidTitle);
+    player.playVideo();
 }
 
 function debugMode(flag) {
@@ -200,6 +201,17 @@ $(function () {
         playNext();
     });
 
+    var $showAnswer = $('#showAnswer');
+
+    $showAnswer.change(function () {
+        if ($showAnswer.is(':checked')) {
+            $('#title').show();
+        }
+        else {
+            $('#title').hide();
+        }
+    });
+
     $('#expand').click(function () {
         $('#player').attr('width', 320);
         $('#player').attr('height', 180);
@@ -209,5 +221,6 @@ $(function () {
         $('#player').attr('width', 0);
         $('#player').attr('height', 0);
     });
-
+    
+    $('[data-toggle="tooltip"]').tooltip();
 });

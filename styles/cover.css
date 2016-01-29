@@ -106,8 +106,8 @@ body {
  margin-top: 20px;   
 }
 
-#title {
-    color: #fff;
+.title {
+    margin-top: 10px;
 }
 
 /*
